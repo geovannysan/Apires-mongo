@@ -1,0 +1,23 @@
+
+###
+GET    http://localhost:4100/depar/ HTTP/1.1
+Content-Type: application/json
+
+###
+POST   http://localhost:4100/depar/User/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "jose",
+    "email": "correo@gmail.com",
+    "password":"contraseña"
+   
+}
+###
+POST    http://localhost:4100/depar/LoginUser/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "correo@gmail.com",
+    "password":"contraseña"
+}
