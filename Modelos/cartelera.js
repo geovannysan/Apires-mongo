@@ -1,5 +1,4 @@
 const {Schema, model} = require('mongoose');
-//const Schema = mongoose.Schema;
 
 const Carteleradb = new Schema({
     horainicio: String,
@@ -13,8 +12,7 @@ const Carteleradb = new Schema({
    },],
    pelicula:[{
      type: Schema.ObjectId,
-     ref: 'Pelicula',}]
-    
+     ref: 'Pelicula',}]    
 });
 
 module.exports = model('Cartelera', Carteleradb);

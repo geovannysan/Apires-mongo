@@ -2,7 +2,8 @@ const {Schema, Model}= require('mongoose');
 
 const boleteria= new Schema({
 	valor:String,
-	fecha:String,
+	fecha:Date,
+	hora:String,
 	asientos:Array,
 	cartelera:[{
 		type:Schema.ObjectId,

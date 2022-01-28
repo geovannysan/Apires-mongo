@@ -1,0 +1,37 @@
+var nuevoArray = new Array(10);
+//Metemos un array en cada posición
+for(var i=0; i<nuevoArray.length; i++) {
+  
+    nuevoArray[i] = new Array(5);
+}
+//Volvemos a recorrer los arrays para la 3ª dimensión
+//Recorremos el primer array
+for(var i=0; i<nuevoArray.length; i++) {
+    //Recorremos el array de cada posición i
+    for(var j=0; j<nuevoArray[i].length; j++) {
+        //agregamos una columnaen cada array
+        nuevoArray[i][j] = j;
+        }
+    }
+console.log(nuevoArray)
+console.log(nuevoArray.length)
+const cuadricula = [
+    ["1","2", "3"],
+    ["1","2", "3"],
+    ["1","2", "3"],
+    ["1","2", "3"],
+    ["1","2", "3"],
+];
+const letras = [
+  "a","b","c","d","f","g","h","i","j","k","l","m","n","o","p","q"
+]
+const asientos=[]
+cuadricula.map((e,i)=>{
+ // let inde = letras.findIndex(i)
+  
+  asientos.push(letras[i],{"columaa":[...e]});
+})
+console.log(asientos)
+//console.log(letras[cuadricula.length])
+//const dato=letras.findIndex(e=>e == "g");
+//console.log(cuadricula[dato-1].filter(e=>e=="1","2"))

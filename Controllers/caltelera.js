@@ -15,7 +15,6 @@ const findById = (req, res) => {
     res.status(200).json(cartel);
   });
 };
-
 const addCartelera = async (req, res) => {
   try{
 let peli = new Cartelera(req.body);

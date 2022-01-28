@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Salas = require("../Modelos/salas")
 
-const findAllCartelera = (req, res) => {
+const findAllSala = (req, res) => {
   Salas.find((err, sala) => {
     err && res.send(500).send(err.message);
     console.log("GET /sala");
@@ -16,7 +16,7 @@ const findById = (req, res) => {
   });
 };
 
-const addCartelera = async (req, res) => {
+const addSala = async (req, res) => {
   try{
 let peli = new Salas(req.body);
  await peli.save();
@@ -26,7 +26,7 @@ let peli = new Salas(req.body);
 
   }};
 
-const deleteCartelera = (req, res) => {
+const deleteSala = (req, res) => {
   Salas.findById(req.params.id, (err, sala) => {
     sala.remove((err) => {
       if (err) return res.status(500).send(err.message);
@@ -35,4 +35,4 @@ const deleteCartelera = (req, res) => {
   });
 };
 
-module.exports = { findAllCartelera, findById, addCartelera, deleteCartelera };
+module.exports = { findAllSala, findById, addSala, deleteSala };
