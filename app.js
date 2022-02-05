@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require('mongoose');
 var cors = require('cors')
 const dep = require('./Router/Peliculasrouter')
-const { createpeliculas,verpelicoual} = require("./libs/initialSetup");
+const { createpeliculas, verpelicoual, createsala } = require("./libs/initialSetup");
+const { Asientos } = require("./libs/Asientos");
 
 const app = express()
 require('dotenv').config()
@@ -15,7 +16,7 @@ app.set('port', process.env.PORT || 1313)
 //midelware json
 app.use(express.json())
 
-//midelware cors
+//midelware cors 
 app.use(cors())
 
 //conexcion mongodb
@@ -29,7 +30,9 @@ mongoose.connect(uri, {
 
 app.use('/', dep)
 createpeliculas();
-verpelicoual();
+createsala();
+//console.log(Asientos(10, 6))//
+//verpelicoual();
 //puerto escuchando
 app.listen(app.get('port'), () => {
     console.log("servidor escuchando ", app.get('port'))

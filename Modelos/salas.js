@@ -1,12 +1,10 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 //const Schema = mongoose.Schema;
 
 const Saladb = new Schema({
-  asientos:Number,
-  nombre:String,
-  formatos:Array,
-  asientos:Object,
-  
+  nombre: String,
+  formatos: Array,
+  asientos: Array,
 });
 
 

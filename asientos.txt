@@ -1,8 +1,54 @@
+asiientos js
+var arrayList = [];
+function toggleValueInArray(array, value) {
+  var index = array.indexOf(value);
+console.log(index)
+  if (index == -1) {
+    array.push(value);
+  } else {
+    do {
+      array.splice(index, 1);
+      index = array.indexOf(value);
+    } while (index != -1);
+  }
+}
+
+
+const container = document.querySelector('.container');
+container.addEventListener('click', e => {
+   const dato = e.target.getAttribute('class').split(" ")[1];
+  if (e.target.classList.contains('round') && 
+      !e.target.classList.contains('occupied')) { 
+    e.target.classList.toggle('selected');
+   toggleValueInArray(arrayList,dato)
+   //console.log(arrayList)
+   
+    
+  }
+  
+});
+
+
+const silla =["a","b","c","d"]
+
+const div = document.querySelector(".row"); // <div class="info"></div>
+
+var listItems = silla.map(function(city){
+  if(city=="b"){return "<div class='round "+city+" occupied'></div>";}
+  return "<div class='round "+city+"'></div>";
+})
+document.querySelector(".row").innerHTML = listItems;
+document.querySelector(".row").innerHTML = listItems.join('');
+
+
+const letras = [
+  "a","b","c","d","f","g","h","i","j","k","l","m","n","o","p","q"
+]
 var nuevoArray = new Array(10);
 //Metemos un array en cada posición
 for(var i=0; i<nuevoArray.length; i++) {
   
-    nuevoArray[i] = new Array(5);
+    nuevoArray[i] = new Array(6);
 }
 //Volvemos a recorrer los arrays para la 3ª dimensión
 //Recorremos el primer array
@@ -10,28 +56,90 @@ for(var i=0; i<nuevoArray.length; i++) {
     //Recorremos el array de cada posición i
     for(var j=0; j<nuevoArray[i].length; j++) {
         //agregamos una columnaen cada array
-        nuevoArray[i][j] = j;
+        nuevoArray[i][j] = {letra:""+letras[i],"numero":j+""};
         }
     }
-console.log(nuevoArray)
-console.log(nuevoArray.length)
-const cuadricula = [
+//console.table(...nuevoArray)
+//console.info(nuevoArray)
+//console.log(nuevoArray.length)
+/*const cuadriculas = [
     ["1","2", "3"],
     ["1","2", "3"],
     ["1","2", "3"],
     ["1","2", "3"],
     ["1","2", "3"],
 ];
-const letras = [
-  "a","b","c","d","f","g","h","i","j","k","l","m","n","o","p","q"
-]
+
 const asientos=[]
 cuadricula.map((e,i)=>{
  // let inde = letras.findIndex(i)
+  const datos = {fila:letras[i],columns:e};
   
-  asientos.push(letras[i],{"columaa":[...e]});
-})
-console.log(asientos)
+  asientos.push(datos);
+})*/
+
+// Comenzar a dibujar
+// x e y nos van a ayudar a dibujar usando las medidas de pixeles
+
+//console.table(...asientos)
 //console.log(letras[cuadricula.length])
 //const dato=letras.findIndex(e=>e == "g");
 //console.log(cuadricula[dato-1].filter(e=>e=="1","2"))
+
+///css butaca
+.container {
+  perspective: 1000px;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.round{
+  background-color: #444451;
+  height: 12px;
+  width: 15px;
+  margin: 3px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.selected {
+  background-color: #0081cb;
+}
+.occupied {
+  background-color: #fff;
+}
+
+/*espacios entre asientos*/
+.seat:nth-of-type(2) {
+  margin-right: 18px;
+}
+
+.seat:nth-last-of-type(2) {
+  margin-left: 18px;
+}
+.row:nth-of-type(3) {
+  margin-bottom: 18px;
+}
+.row:nth-last-of-type(2) {
+  margin-bottom: 18px;
+}
+body{
+  background-color: #242333;
+}
+
+const options = [[1, 2, 3],[1, 2, 3],[1, 2, 3]];
+
+const div = document.querySelector('div');
+
+div.innerHTML = `${options.map(val => `<div class='row'>${val.map(e=>`<div class="round ${e} "></div>`).join('')}</div>`).join('')}`;
+
+
+options.map(val => val.map(e=>console.log(e)))
