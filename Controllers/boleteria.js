@@ -5,7 +5,7 @@ const findAllBole = (req, res) => {
   Boleto.find((err, sala) => {
     err && res.send(500).send(err.message);
     console.log("GET /boleto");
-    res.status(200).json(bole);
+    res.status(200).json(sala);
   });
 };
 const findById = (req, res) => {
@@ -29,25 +29,18 @@ const asientoocupados = async (req, res, next) => {
   } catch (err) {
     return res.status(403).send({ auth: false, message: "No Token aws Provided" });
   }
+}
+const addBole = async (req, res) => {
+  try {
+    let peli = new Boleto(req.body);
+    await peli.save();
+    res.status(200).json(peli);
+  } catch (error) {
+    return res.status(500).send(error.message);
 
-  const addBole = async (req, res) => {
-    try {
-      let peli = new Boleto(req.body);
-      await peli.save();
-      res.status(200).json(peli);
-    } catch (error) {
-      return res.status(500).send(error.message);
+  }
+};
 
-    }
-  };
 
-  const deleteBole = (req, res) => {
-    Boleto.findById(req.params.id, (err, sala) => {
-      sala.remove((err) => {
-        if (err) return res.status(500).send(err.message);
-        res.status(200).send();
-      });
-    });
-  };
 
-  module.exports = { findAllBole, findById, addBole, deleteBole };
+module.exports = { findAllBole, findById, addBole, deleteBole };
