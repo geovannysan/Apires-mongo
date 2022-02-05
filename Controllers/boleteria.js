@@ -17,36 +17,37 @@ const findById = (req, res) => {
 };
 
 //agragar consultas
-const asientoocupados = async(req, res,next)=>{
-  const {fecha,hora,asientos} = req.body;
-  try{
-  Boleto.find({"fecha":fecha,"hora":hora,"asientos":{"$in":[...asientos]}},(err,bolete)=>{
-    if (err) return res.status(403).send({ auth: false, message: "No Token aws Provided" });
-    if (bolete.length>0)return res.status(403).send({ auth: false, message: [bolete] })
-    next();
-  
-  })
-  }catch(err){
-   return res.status(403).send({ auth: false, message: "No Token aws Provided" });
+const asientoocupados = async (req, res, next) => {
+  const { fecha, hora, asientos } = req.body;
+  try {
+    Boleto.find({ "fecha": fecha, "hora": hora, "asientos": { "$in": [...asientos] } }, (err, bolete) => {
+      if (err) return res.status(403).send({ auth: false, message: "No Token aws Provided" });
+      if (bolete.length > 0) return res.status(403).send({ auth: false, message: [bolete] })
+      next();
+
+    })
+  } catch (err) {
+    return res.status(403).send({ auth: false, message: "No Token aws Provided" });
   }
 
-const addBole = async (req, res) => {
-  try{
-let peli = new Boleto(req.body);
- await peli.save();
-  res.status(200).json(peli);
-  }catch(error){
-    return res.status(500).send(error.message);
+  const addBole = async (req, res) => {
+    try {
+      let peli = new Boleto(req.body);
+      await peli.save();
+      res.status(200).json(peli);
+    } catch (error) {
+      return res.status(500).send(error.message);
 
-  }};
+    }
+  };
 
-const deleteBole = (req, res) => {
-  Boleto.findById(req.params.id, (err, sala) => {
-    sala.remove((err) => {
-      if (err) return res.status(500).send(err.message);
-      res.status(200).send();
+  const deleteBole = (req, res) => {
+    Boleto.findById(req.params.id, (err, sala) => {
+      sala.remove((err) => {
+        if (err) return res.status(500).send(err.message);
+        res.status(200).send();
+      });
     });
-  });
-};
+  };
 
-module.exports = { findAllBole, findById, addBole, deleteBole };
+  module.exports = { findAllBole, findById, addBole, deleteBole };

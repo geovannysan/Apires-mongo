@@ -16,15 +16,16 @@ const findById = (req, res) => {
   });
 };
 const addCartelera = async (req, res) => {
-  try{
-let peli = new Cartelera(req.body);
+  try {
+    let peli = new Cartelera(req.body);
 
- await peli.save();
-  res.status(200).json(peli);
-  }catch(error){
+    await peli.save();
+    res.status(200).json(peli);
+  } catch (error) {
     return res.status(500).send(error.message);
 
-  }};
+  }
+};
 
 const deleteCartelera = (req, res) => {
   Cartelera.findById(req.params.id, (err, cartel) => {
