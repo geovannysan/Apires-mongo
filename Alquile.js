@@ -43,17 +43,13 @@ router.post('/LoginUser', async (req, res) => {
         res.status(400).send(error)
         console.log(error)
     }
-})
- // if () return res.status(404).send('Invalid Email or Password.');   
+})  
 router.post('/CreateUser', async (req, res) => {
     try {
         const user = new Users({ nombre: req.body.nombre, email: req.body.email, password: req.password.email })
         user.password = await user.encrypas(user.password)
-        // const pass = await bcrypt.hash(req.body.password, 10)
         await user.save()
         console.log(user)
-
-
     } catch (error) {
         console.log(error)
     }

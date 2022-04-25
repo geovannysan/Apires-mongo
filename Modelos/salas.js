@@ -4,7 +4,7 @@ const { Schema, model } = require('mongoose');
 const Saladb = new Schema({
   nombre: String,
   formatos: Array,
-  asientos: Array,
+  asientos: Object,
 });
 
 

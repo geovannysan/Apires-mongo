@@ -5,7 +5,13 @@ const bcrypt = require('bcrypt');
 const usuariosapp = new Schema({
     nombre: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    GPS:{
+    	lat:String,
+    	lng: String,
+    	time:Date,
+    }
+    
 });
 
 usuariosapp.methods.encrypas  = async (password)=>{

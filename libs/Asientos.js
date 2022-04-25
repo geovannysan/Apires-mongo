@@ -15,9 +15,9 @@ function Asientos(fila, columna) {
         //Recorremos el array de cada posición i
         for (var j = 0; j < nuevoArray[i].length; j++) {
             //agregamos una columnaen cada array
-            nuevoArray[i][j] = { letra: "" + letras[i], "numero": j + "" };
+            nuevoArray[i][j] = { letra: "" + letras[i]+""+j };
         }
     }
     return nuevoArray;
 }
-module.exports = { Asientos };
+module.exports = { Asientos }; 

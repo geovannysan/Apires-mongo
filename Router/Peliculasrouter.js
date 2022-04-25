@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 const Peliculasrut = require("../Controllers/peliculas")
 const Carteleras = require("../Controllers/caltelera")
-const verifyToken = require("../libs/verificatoken")
+const {verifyToken} = require("../libs/verificatoken")
 
 
 router.route('/peliculas')
@@ -15,7 +15,7 @@ router.route('/peliculas/:id')
     .post(Peliculasrut.deletePelicula);
 
 router.route('/cartelera')
-    .get(Carteleras.findAllCartelera)
+    .get(verifyToken,Carteleras.findAllCartelera)
     .post(Carteleras.deleteCartelera);
 
 router.route('/cartelera/:id')
