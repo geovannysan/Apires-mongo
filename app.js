@@ -4,7 +4,7 @@ var cors = require('cors')
 const dep = require('./Router/Peliculasrouter')
 const { createpeliculas, verpelicoual, createsala } = require("./libs/initialSetup");
 const { Asientos } = require("./libs/Asientos");
-
+const socket = require('socket.io'), http = require('http'),
 const app = express()
 require('dotenv').config()
 

@@ -6,6 +6,7 @@ const historyGPsSchema = new Schema({
     time:Date,
     lng: String,
     lat:String,
+    spedd:String,
     usuario:[{
      type: Schema.ObjectId,
      ref: 'Users',}] 
