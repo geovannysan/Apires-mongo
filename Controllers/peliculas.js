@@ -4,7 +4,7 @@ const Pelicula = require("../Modelos/peliculas")
 const findAllPeliculas = (req, res) => {
   Pelicula.find((err, profiles) => {
     err && res.send(500).send(err.message);
-    console.log("GET /profiles");
+    console.log("GET /profiles" + profiles);
     res.status(200).json(profiles);
   });
 };
