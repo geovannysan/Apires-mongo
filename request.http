@@ -4,13 +4,14 @@ GET    http://localhost:1313/home/peliculas/ HTTP/1.1
 Content-Type: application/json
 
 ###
-POST   http://localhost:4100/depar/User/ HTTP/1.1
+POST     http://localhost:1313/NewUSer/Update/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "nombre": "jose",
-    "email": "correo@gmail.com",
-    "password":"contraseña"
+    
+    "nombre": "los emos",
+    "email":"60eb66d80be4242bf02fd286"
+
    
 }
 ###
