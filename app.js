@@ -4,6 +4,7 @@ var cors = require('cors')
 const { findAllUSers } = require('./WhatchMongo/Users')
 const dep = require('./Router/Peliculasrouter')
 const Usersmon = require('./Alquile');
+const jwt = require('jsonwebtoken');
 //const { createpeliculas, verpelicoual, createsala } = require("./libs/initialSetup");
 //const { Asientos } = require("./libs/Asientos");
 let app = require('express')();
@@ -33,15 +34,26 @@ app.use('/home', dep);
 
 
 
-io.on('connection', (socket) => {
-    console.log('USuario: ' + socket.id)
+io.use(function (socket, next) {
+    if (socket.handshake.query && socket.handshake.query.token) {
+        jwt.verify(socket.handshake.query.token, process.env.SECRET, function (err, decoded) {
+            if (err) return next(new Error('Authentication error'));
+            socket.decoded = decoded;
+            next();
+        });
+    }
+    else {
+        next(new Error('Authentication error'));
+    }
+}).on('connection', (socket) => {
+
     socket.on('disconnect', (reason) => {
         console.log('desconectado: ' + reason)
     });
     socket.on('set-name', (username) => {
-        users[username] = socket.id;
+        users[username] = socket.decoded.nombre;
         console.log(users);
-        io.emit('esrconectado', username);
+        io.emit('esrconectado', socket.decoded.nombre);
     })
 
 });

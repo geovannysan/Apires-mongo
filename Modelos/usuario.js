@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 //const mongoose {Schema} = mongoose.Schema;
 
 const usuariosapp = new Schema({
-	nombre: { type: String, required: true, unique: true },
+	nombre: { type: String, required: true },
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
 	GPS: {
