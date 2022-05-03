@@ -16,11 +16,35 @@ router.get('/', async (req, res) => {
 })
 router.post('/Update', async (req, res) => {
     try {
+
+        const password = new Users()
+        const dato = await password.encrypas(req.body.password)
+        const upta = await Users.updateOne({ _id: req.body.email }, {
+            $set: {
+                "password": dato
+            }
+        })
+
+        res.status(200).json(upta)
+        /*const user = new Users({ nombre: req.body.nombre, email: req.body.email, password: req.body.password })
+        user.password = await user.encrypas(user.password)
+        await user.save()/*/
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+router.put('/Update', async (req, res) => {
+    try {
         const upta = await Users.updateOne(
             { _id: req.body.email },
             {
                 $set: {
-                    nombre: req.body.nombre
+                    gps: {
+                        "lat": req.body.lat,
+                        "lng": req.body.lng,
+                        "spead": req.body.spead
+                    }
                 }
             })
         res.status(200).json(upta)
@@ -49,7 +73,7 @@ router.post('/CreateUser', async (req, res) => {
         const user = new Users({ nombre: req.body.nombre, email: req.body.email, password: req.body.password })
         user.password = await user.encrypas(user.password)
         await user.save()
-
+        res.status(200).send(res)
     } catch (error) {
         console.log(error)
     }

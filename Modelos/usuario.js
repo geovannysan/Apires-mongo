@@ -6,11 +6,7 @@ const usuariosapp = new Schema({
 	nombre: { type: String, required: true },
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
-	GPS: {
-		lat: String,
-		lng: String,
-		time: Date,
-	}
+	gps: { lat: String, lng: String, spead: String },
 
 });
 

@@ -10,7 +10,8 @@ const findAllUSers = async () => {
         const collection = db.collection('users');
         const changeStream = collection.watch();
         changeStream.on('change', next => {
-            console.log(next);
+            const { updatedFields } = next.updateDescription;
+            console.log([next, next.documentKey['_id'], updatedFields]);
         });
     })
 };

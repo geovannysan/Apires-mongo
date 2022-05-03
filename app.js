@@ -31,7 +31,7 @@ mongoose.connect(uri, {
 
 app.use('/NewUSer', Usersmon);
 app.use('/home', dep);
-
+const db = mongoose.connection;
 
 
 io.use(function (socket, next) {
@@ -43,21 +43,39 @@ io.use(function (socket, next) {
         });
     }
     else {
+        console.log("Authentication error")
         next(new Error('Authentication error'));
     }
 }).on('connection', (socket) => {
-
+    console.log(" - ");
     socket.on('disconnect', (reason) => {
-        console.log('desconectado: ' + reason)
+        // users = user.filte(e=>e)
+        delete users[socket.decoded.id]
+        //console.log('desconectado: ' + socket.decoded.id + " - " + socket.id)
+        // console.log(users)
     });
+    users[socket.decoded.id] = socket.id;
+
+    //console.log(users);
+    // console.log(users[socket.decoded.id])
+    // io.to(users['id']).emit('actuaGPS',data)
+
     socket.on('set-name', (username) => {
-        users[username] = socket.decoded.nombre;
-        console.log(users);
-        io.emit('esrconectado', socket.decoded.nombre);
+        io.emit('esrconectado', username + " " + socket.decoded.id);
+    })
+    db.once('open', () => {
+        const collection = db.collection('users');
+        const changeStream = collection.watch();
+        changeStream.on('change', next => {
+            const { updatedFields } = next.updateDescription;
+            if (!users[next.documentKey['_id']]) return
+            io.to(users[next.documentKey['_id']]).emit('actuaGPS', updatedFields)
+            //console.log([next, next.documentKey['_id'], updatedFields]);
+        });
     })
 
 });
-findAllUSers();
+//findAllUSers();
 var port = process.env.PORT || 1313;
 server.listen(app.get('port'), function () {
     console.log('listening in http://localhost:' + port);
